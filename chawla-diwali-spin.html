@@ -121,8 +121,8 @@ input:focus,select:focus,textarea:focus{border-color:#ff2d87;box-shadow:0 0 0 4p
         <h2>Enter Your Details</h2>
         <p class="sub">Register first to unlock your lucky spin!</p>
         <form id="customerForm">
-          <div class="field"><label for="name">Full Name *</label><input id="name" name="name" autocomplete="name" placeholder="Enter your full name" required maxlength="100"></div>
-          <div class="field"><label for="mobile">Mobile Number *</label><input id="mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" placeholder="10-digit mobile number" pattern="[0-9+\-\s]{10,16}" required maxlength="16"></div>
+          <div class="field"><label for="name">Full Name *</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Enter your full name" pattern="[A-Za-z ]+" title="Please use alphabets and spaces only." required maxlength="100"></div>
+          <div class="field"><label for="mobile">Mobile Number *</label><input id="mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" title="Enter a valid 10-digit Indian mobile number starting with 6, 7, 8 or 9." required maxlength="10"></div>
           <div class="field"><label for="address">Full Address *</label><textarea id="address" name="address" autocomplete="street-address" placeholder="Enter your address" rows="2" required maxlength="300"></textarea></div>
           <div class="field"><label for="shoppingAmount">Shopping Amount *</label>
             <select id="shoppingAmount" name="shoppingAmount" required>
@@ -194,6 +194,11 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxRfsltPI4Ic6
 const $ = id => document.getElementById(id);
 const form=$("customerForm"), formScreen=$("formScreen"), wheelScreen=$("wheelScreen"), winScreen=$("winScreen");
 const continueBtn=$("continueBtn"), formError=$("formError"), wheel=$("wheel"), spinBtn=$("spinBtn"), wheelNote=$("wheelNote"), shell=$("shell");
+const nameInput=$("name"), mobileInput=$("mobile");
+
+// Keep names to letters/spaces and mobile numbers to digits only.
+nameInput.addEventListener("input",()=>{ nameInput.value=nameInput.value.replace(/[^A-Za-z ]/g,""); });
+mobileInput.addEventListener("input",()=>{ mobileInput.value=mobileInput.value.replace(/[^0-9]/g,"").slice(0,10); });
 let customerId="", isSpinning=false, rotation=0;
 
 /* twinkling stars */
@@ -244,7 +249,8 @@ function sendToSheet(payload){
 form.addEventListener("submit",async e=>{
   e.preventDefault();
   if(!form.reportValidity())return;
-  if($("mobile").value.replace(/\D/g,"").length<10){formError.textContent="Please enter a valid mobile number.";formError.style.display="block";return;}
+  if(!/^[6-9][0-9]{9}$/.test(mobileInput.value)){formError.textContent="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8 or 9.";formError.style.display="block";return;}
+  if(!/^[A-Za-z ]+$/.test(nameInput.value.trim())){formError.textContent="Please enter your name using alphabets only.";formError.style.display="block";return;}
   formError.style.display="none";
   continueBtn.disabled=true;continueBtn.textContent="PREPARING YOUR LUCKY SPIN…";
   const data={action:"register",
