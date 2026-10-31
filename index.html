@@ -208,7 +208,7 @@ let customerId="", isSpinning=false, rotation=0;
 const segments=[
   {icon:"📱",lines:["Vivo Y31T"],c1:"#ffd000",c2:"#ff8a00"},
   {icon:"🔊",lines:["Speaker"],c1:"#ff5fa2",c2:"#d81b60"},
-  {icon:"🎧",lines:["Overhead","Phone"],c1:"#9d6bff",c2:"#5e35b1"},
+  {icon:"🎧",lines:["Overhead","Headphones"],c1:"#9d6bff",c2:"#5e35b1"},
   {icon:"🎁",lines:["Better Luck","Next Time"],c1:"#2de2c0",c2:"#00897b"},
   {icon:"🎧",lines:["Airpods"],c1:"#4fc3f7",c2:"#0277bd"},
   {icon:"🔋",lines:["Power Bank"],c1:"#ff6b5b",c2:"#c62828"}
@@ -268,7 +268,7 @@ form.addEventListener("submit",async e=>{
 // All other displayed gifts are selectable outcomes.
 const prizes=[
   {name:"Speaker",icon:"🔊",angle:60},
-  {name:"Overhead Phone",icon:"🎧",angle:120},
+  {name:"Overhead Headphones",icon:"🎧",angle:120},
   {name:"Better Luck Next Time",icon:"🎁",angle:180},
   {name:"Airpods",icon:"🎧",angle:240},
   {name:"Power Bank",icon:"🔋",angle:300}
