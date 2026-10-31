@@ -157,7 +157,7 @@ input:focus,select:focus,textarea:focus{border-color:#ff2d87;box-shadow:0 0 0 4p
           <button id="spinBtn" class="spin-center" type="button">SPIN!</button>
         </div>
         <p class="note" id="wheelNote">Tap SPIN and find your gift!</p>
-        <p class="fine">Activa and Goa Trip are grand-prize highlights and are not instant spin outcomes.</p>
+        <p class="fine">Vivo Y31T is displayed as a grand-prize highlight and is not an instant spin outcome.</p>
       </div>
     </section>
 
@@ -206,12 +206,12 @@ let customerId="", isSpinning=false, rotation=0;
 
 /* ---------- Wheel (SVG): each label sits on a white pill, centred on its slice ---------- */
 const segments=[
-  {icon:"⌚",lines:["Watch"],c1:"#ffd000",c2:"#ff8a00"},
-  {icon:"🎧",lines:["Headphones"],c1:"#ff5fa2",c2:"#d81b60"},
-  {icon:"🔊",lines:["Speaker"],c1:"#9d6bff",c2:"#5e35b1"},
-  {icon:"🛵",lines:["Activa"],c1:"#2de2c0",c2:"#00897b"},
-  {icon:"🏝️",lines:["Goa Trip"],c1:"#4fc3f7",c2:"#0277bd"},
-  {icon:"🎁",lines:["Better Luck","Next Time"],c1:"#ff6b5b",c2:"#c62828"}
+  {icon:"📱",lines:["Vivo Y31T"],c1:"#ffd000",c2:"#ff8a00"},
+  {icon:"🔊",lines:["Speaker"],c1:"#ff5fa2",c2:"#d81b60"},
+  {icon:"🎧",lines:["Overhead","Phone"],c1:"#9d6bff",c2:"#5e35b1"},
+  {icon:"🎁",lines:["Better Luck","Next Time"],c1:"#2de2c0",c2:"#00897b"},
+  {icon:"🎧",lines:["Airpods"],c1:"#4fc3f7",c2:"#0277bd"},
+  {icon:"🔋",lines:["Power Bank"],c1:"#ff6b5b",c2:"#c62828"}
 ];
 function pt(r,d){const a=d*Math.PI/180;return[(r*Math.sin(a)).toFixed(2),(-r*Math.cos(a)).toFixed(2)];}
 function buildWheel(){
@@ -264,12 +264,14 @@ form.addEventListener("submit",async e=>{
   }finally{continueBtn.disabled=false;continueBtn.textContent="CONTINUE TO SPIN ✨";}
 });
 
-// Only these four outcomes are selectable; Activa and Goa Trip stay visible but are not instant outcomes.
+// Vivo Y31T is clearly shown as a grand-prize highlight, not an instant spin outcome.
+// All other displayed gifts are selectable outcomes.
 const prizes=[
-  {name:"Watch",icon:"⌚",angle:0},
-  {name:"Headphones",icon:"🎧",angle:60},
-  {name:"Speaker",icon:"🔊",angle:120},
-  {name:"Better Luck Next Time",icon:"🎁",angle:300}
+  {name:"Speaker",icon:"🔊",angle:60},
+  {name:"Overhead Phone",icon:"🎧",angle:120},
+  {name:"Better Luck Next Time",icon:"🎁",angle:180},
+  {name:"Airpods",icon:"🎧",angle:240},
+  {name:"Power Bank",icon:"🔋",angle:300}
 ];
 spinBtn.addEventListener("click",async()=>{
   if(isSpinning)return;
